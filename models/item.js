@@ -13,7 +13,9 @@ const itemSchema = new Schema(
         },
         quantity: {
             type: Number,
-            required: true
+            required: true,
+            min: 1,
+            max: 15
         }
     }, {
         timestamps: true
