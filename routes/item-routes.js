@@ -48,5 +48,15 @@ router.patch('/items/:id', (req, res, next) => {
 })
 
 
+// DELETE
+// DELETE /items/:id
+router.delete('/items/:id', (req, res, next) => {
+    Item.findById(req.params.id)
+        .then(item => {
+            return item.deleteOne()
+        })
+        .then(() => res.sendStatus(204))
+        .catch(next)
+})
 
 module.exports = router
