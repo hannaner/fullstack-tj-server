@@ -25,15 +25,6 @@ router.get('/items/:id', (req, res, next) => {
         })
 })
 
-/**
-router.get('/items/:id'), (req, res, next) => {
-    Item.findById(req.params.id)
-        .then(item => {
-            res.status(200).json({item: item})
-        })
-} 
-
- */
 
 // CREATE
 // POST /items
@@ -44,5 +35,18 @@ router.post('/items', (req, res, next) => {
         })
         .catch(next)
 })
+
+// UPDATE
+// PATCH /items/:id
+router.patch('/items/:id', (req, res, next) => {
+    Item.findById(req.params.id)
+        .then(item => {
+            return item.updateOne(req.body.item)
+        })
+        .then(() => res.sendStatus(204))
+        .catch(next)
+})
+
+
 
 module.exports = router
