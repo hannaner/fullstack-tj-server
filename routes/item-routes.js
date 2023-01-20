@@ -1,5 +1,6 @@
 const express = require('express')
 const Item = require('../models/item')
+const { handle404 } = require('../lib/custom-errors')
 
 const router = express.Router()
 
@@ -20,6 +21,7 @@ router.get('/items', (req, res, next) => {
 // GET /items/:id
 router.get('/items/:id', (req, res, next) => {
     Item.findById(req.params.id)
+        .then(handle404)
         .then(item => {
             res.status(200).json({ item: item })
         })
@@ -40,6 +42,7 @@ router.post('/items', (req, res, next) => {
 // PATCH /items/:id
 router.patch('/items/:id', (req, res, next) => {
     Item.findById(req.params.id)
+        .then(handle404)
         .then(item => {
             return item.updateOne(req.body.item)
         })
@@ -52,6 +55,7 @@ router.patch('/items/:id', (req, res, next) => {
 // DELETE /items/:id
 router.delete('/items/:id', (req, res, next) => {
     Item.findById(req.params.id)
+        .then(handle404)
         .then(item => {
             return item.deleteOne()
         })
