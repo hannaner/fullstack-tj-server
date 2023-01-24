@@ -7,8 +7,9 @@ const PORT = 8000
 
 const requestLogger = require('./lib/request-logger')
 const itemSeed = require('./lib/item-seed')
-
 const itemRoutes = require('./routes/item-routes')
+const userRoutes = require('./routes/user-routes')
+const basketRoutes = require('./routes/basket-routes')
 
 mongoose.set('strictQuery', true)
 
@@ -25,6 +26,8 @@ app.use(express.json())
 
 app.use(requestLogger)
 app.use(itemRoutes)
+app.use(userRoutes)
+app.use(basketRoutes)
 
 app.use('/seed', itemSeed)
 

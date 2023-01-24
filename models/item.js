@@ -16,12 +16,15 @@ const itemSchema = new Schema(
             required: true,
             min: 1,
             max: 15
+        },
+        basket: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Basket'
         }
     }, {
         timestamps: true
     }
 )
 
-const Item = mongoose.model('Item', itemSchema)
 
-module.exports = Item
+module.exports = itemSchema
